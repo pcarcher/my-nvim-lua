@@ -67,7 +67,7 @@ return {
 					return require("codecompanion.adapters").extend("openai_compatible", {
 						env = {
 							url = "https://routellm.abacus.ai",
-							api_key = "ABACUS_API_KEY", -- Lee de tu variable de entorno Fish
+							api_key = "ABACUS_API_KEY",
 							chat_url = "/v1/chat/completions",
 						},
 						headers = {
