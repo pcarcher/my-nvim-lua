@@ -36,6 +36,7 @@ return {
 				},
 			},
 			"neovim/nvim-lspconfig",
+			"jay-babu/mason-nvim-dap.nvim",
 		},
 		config = function(_, opts)
 			require("mason-lspconfig").setup({
@@ -290,6 +291,23 @@ return {
 								},
 							},
 						})
+					end,
+				},
+			})
+
+			require("mason-nvim-dap").setup({
+				ensure_installed = {
+					"python",
+					"cpptools",
+					"codelldb",
+					"node-debug2-adapter",
+					"php-debug-adapter",
+					"bash-debug-adapter",
+				},
+				automatic_installation = true,
+				handlers = {
+					function(config)
+						require("mason-nvim-dap").default_setup(config)
 					end,
 				},
 			})
