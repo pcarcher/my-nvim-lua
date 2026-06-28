@@ -28,7 +28,6 @@ return {
       ]])
 
 			require("toggleterm").setup({
-				-- tamaños fijos para horizontal / vertical
 				size = function(term)
 					if term.direction == "horizontal" then
 						return 10 -- alto fijo (líneas)
@@ -63,4 +62,3 @@ return {
 		end,
 	},
 }
-

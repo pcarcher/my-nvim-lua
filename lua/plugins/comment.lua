@@ -6,20 +6,20 @@ return {
 		init = function()
 			vim.g.kommentary_create_default_mappings = false
 		end,
+		keys = {
+			{
+				"<leader>c",
+				group = "Comment",
+				mode = { "n", "x" },
+			},
+			{ "<leader>/", "<Plug>kommentary_line_default", mode = "n", desc = "Comment line" },
+			{ "<leader>c", "<Plug>kommentary_motion_default", mode = "n", desc = "Comment motion" },
+			{ "<leader>cic", "<Plug>kommentary_line_increase", mode = "n", desc = "Comment line increase" },
+			{ "<leader>ci", "<Plug>kommentary_motion_increase", mode = "n", desc = "Comment motion increase" },
+			{ "<leader>cdc", "<Plug>kommentary_line_decrease", mode = "n", desc = "Comment line decrease" },
+			{ "<leader>cd", "<Plug>kommentary_motion_decrease", mode = "n", desc = "Comment motion decrease" },
+		},
 		config = function()
-			local map = vim.keymap.set
-
-			map("n", "<leader>/", "<Plug>kommentary_line_default")
-			map("n", "<leader>c", "<Plug>kommentary_motion_default")
-
-			map("n", "<leader>cic", "<Plug>kommentary_line_increase")
-			map("n", "<leader>ci", "<Plug>kommentary_motion_increase")
-			map("x", "<leader>ci", "<Plug>kommentary_visual_increase")
-
-			map("n", "<leader>cdc", "<Plug>kommentary_line_decrease")
-			map("n", "<leader>cd", "<Plug>kommentary_motion_decrease")
-			map("x", "<leader>cd", "<Plug>kommentary_visual_decrease")
-
 			require("kommentary.config").configure_language("typescript", {
 				single_line_comment_string = "//",
 				multi_line_comment_strings = { "{/*", "*/}" },
@@ -28,4 +28,3 @@ return {
 		end,
 	},
 }
-

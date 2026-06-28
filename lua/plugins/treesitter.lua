@@ -2,7 +2,7 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		-- tag = "v0.10.0",
+		tag = "v0.10.0",
 		-- tag = "main",
 		build = ":TSUpdate",
 		lazy = false,
