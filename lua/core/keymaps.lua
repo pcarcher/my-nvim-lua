@@ -14,11 +14,11 @@ local keymap = vim.keymap.set
 editor_option.shortmess = editor_option.shortmess .. "c"
 
 local set_opts = function(opts)
-  opts = opts or {}
-  local noremap = opts.noremap == nil and true or opts.noremap
-  local silent  = opts.silent  == nil and true or opts.silent
-  local desc    = opts.desc or nil
-  return { noremap = noremap, silent = silent, desc = desc }
+	opts = opts or {}
+	local noremap = opts.noremap == nil and true or opts.noremap
+	local silent = opts.silent == nil and true or opts.silent
+	local desc = opts.desc or nil
+	return { noremap = noremap, silent = silent, desc = desc }
 end
 
 -- desactivar Space normal para usarlo como <leader>
@@ -41,7 +41,7 @@ keymap("n", "<leader>nm", "<cmd>messages<CR>", set_opts({ desc = "Messages" }))
 
 -- telescope grep
 keymap("n", "<leader>pf", function()
-  require("telescope.builtin").grep_string({ initial_mode = "normal" })
+	require("telescope.builtin").grep_string({ initial_mode = "normal" })
 end, set_opts({ desc = "Search" }))
 
 -- move keys
@@ -70,24 +70,44 @@ keymap("n", "D", [["_d0]], set_opts())
 
 -- search and replace
 -- Normal: reemplaza la palabra bajo el cursor en todo el archivo
-keymap("n", "<leader>r", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], set_opts({
-  desc = "Replace word under cursor (file)",
-}))
+keymap(
+	"n",
+	"<leader>r",
+	[[:%s/\<<C-r><C-w>\>//g<Left><Left>]],
+	set_opts({
+		desc = "Replace word under cursor (file)",
+	})
+)
 
 -- Visual: usa la selección y reemplaza sólo en ese rango
-keymap("v", "<leader>r", [[:<C-u>'<,'>s/\V<C-r>"//g<Left><Left>]], set_opts({
-  desc = "Replace selection (visual range)",
-}))
+keymap(
+	"v",
+	"<leader>r",
+	[[:<C-u>'<,'>s/\V<C-r>"//g<Left><Left>]],
+	set_opts({
+		desc = "Replace selection (visual range)",
+	})
+)
 
 -- Buscar palabra bajo el cursor en todos los archivos
-keymap("n", "<leader>g", [[:vimgrep /\<<C-r><C-w>\>/gj **/*<CR>:copen<CR>]], set_opts({
-  desc = "Search word in all files (vimgrep)",
-}))
+keymap(
+	"n",
+	"<leader>g",
+	[[:vimgrep /\<<C-r><C-w>\>/gj **/*<CR>:copen<CR>]],
+	set_opts({
+		desc = "Search word in all files (vimgrep)",
+	})
+)
 
 -- Quickfix replace (después de vimgrep)
-keymap("n", "<leader>rg", [[:cfdo %s/\V<C-r>///gc | update<c-r>=setcmdpos(getcmdpos()-12)[1]<cr>]], set_opts({
-  desc = "Open quickfix window and replace",
-}))
+keymap(
+	"n",
+	"<leader>rg",
+	[[:cfdo %s/\V<C-r>///gc | update<c-r>=setcmdpos(getcmdpos()-12)[1]<cr>]],
+	set_opts({
+		desc = "Open quickfix window and replace",
+	})
+)
 
 -- WhichKey
 keymap("n", "<leader>t", "<cmd>WhichKey<CR>", set_opts())
@@ -98,11 +118,22 @@ keymap("n", "<leader>ts", "<cmd>sort<CR>", set_opts())
 keymap("n", "<leader>gm", "<cmd>GitMessenger<CR>", set_opts())
 
 -- toggleterm
-keymap("n", "<leader>at", "<cmd>ToggleTerm direction=float<CR>", set_opts({
-  desc = "Terminal float",
-}))
+keymap(
+	"n",
+	"<leader>at",
+	"<cmd>ToggleTerm direction=float<CR>",
+	set_opts({
+		desc = "Terminal float",
+	})
+)
 
 -- test de format (sólo LSP)
 keymap("n", "<leader>FT", function()
-  vim.lsp.buf.format()
+	vim.lsp.buf.format()
 end, set_opts({ desc = "Format test" }))
+
+-- Window navigation
+keymap("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+keymap("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
+keymap("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
+keymap("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
